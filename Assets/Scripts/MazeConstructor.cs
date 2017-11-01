@@ -51,6 +51,9 @@ public class MazeConstructor : MonoBehaviour {
 		MeshFilter mf = go.AddComponent<MeshFilter>();
 		mf.mesh = _meshGenerator.FromData(data);
 
+		MeshCollider mc = go.AddComponent<MeshCollider>();
+		mc.sharedMesh = mf.mesh;
+
 		MeshRenderer mr = go.AddComponent<MeshRenderer>();
 		mr.materials = new Material[2] {mat1, mat2};
 	}
