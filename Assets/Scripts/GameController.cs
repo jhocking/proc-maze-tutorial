@@ -17,18 +17,6 @@ public class GameController : MonoBehaviour {
 		_meshGenerator = new MazeMeshGenerator();
 
 		GenerateNewMaze(13, 15, 3.75f, 3.5f);
-
-		// TODO test display of generated maze
-		GameObject go = new GameObject();
-		go.transform.position = Vector3.zero;
-		go.name = "Generated Dungeon";
-
-		MeshFilter mf = go.AddComponent<MeshFilter>();
-		mf.mesh = _meshGenerator.maze;
-
-		// multiple materials for floors and walls
-		MeshRenderer mr = go.AddComponent<MeshRenderer>();
-		mr.materials = new Material[2] {stoneMat, brickMat};
 	}
 
 	public void GenerateNewMaze(int sizeRows, int sizeCols, float width, float height) {
@@ -37,17 +25,22 @@ public class GameController : MonoBehaviour {
 		}
 		_dataGenerator.GenerateMaze(sizeRows, sizeCols);
 		_meshGenerator.GenerateMaze(_dataGenerator.maze, width, height);
-		/* TODO
-		hallWidth = width;
-		hallHeight = height;
 
-		FindStartPosAndDir();
-		*/
-	}
-	
-	// Update is called once per frame
-	void Update() {
-		
+		GameObject go = new GameObject();
+		go.transform.position = Vector3.zero;
+		go.name = "Generated Dungeon";
+
+		MeshFilter mf = go.AddComponent<MeshFilter>();
+		mf.mesh = _meshGenerator.maze;
+
+		MeshCollider mc = go.AddComponent<MeshCollider>();
+		mc.sharedMesh = mf.mesh;
+
+		// multiple materials for floors and walls
+		MeshRenderer mr = go.AddComponent<MeshRenderer>();
+		mr.materials = new Material[2] {stoneMat, brickMat};
+
+		// TODO FindStartPosition();
 	}
 
 	// top-down debug display
@@ -71,7 +64,11 @@ public class GameController : MonoBehaviour {
 			msg += "\n";
 		}
 
-		//Debug.Log(msg);
 		GUI.Label(new Rect(20, 20, 500, 500), msg);
+	}
+
+	// Update is called once per frame
+	void Update() {
+
 	}
 }
