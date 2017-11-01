@@ -3,24 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class MazeDataGenerator {
-	public int[,] maze { get; private set; }
-
+	
 	// generator params
-	public float placementThreshold; // chance of empty space
+	public float placementThreshold;	// chance of empty space
 
 	public MazeDataGenerator() {
 		placementThreshold = .1f;
-
-		// default to walls surrounding a single empty cell
-		maze = new int[,] {
-			{1, 1, 1},
-			{1, 0, 1},
-			{1, 1, 1}
-		};
 	}
 
-	public void GenerateMaze(int sizeRows, int sizeCols) {
-		maze = new int[sizeRows, sizeCols];
+	public int[,] FromDimensions(int sizeRows, int sizeCols) {
+		int[,] maze = new int[sizeRows, sizeCols];
 
 		int rMax = maze.GetUpperBound(0);
 		int cMax = maze.GetUpperBound(1);
@@ -46,5 +38,7 @@ public class MazeDataGenerator {
 				}
 			}
 		}
+
+		return maze;
 	}
 }

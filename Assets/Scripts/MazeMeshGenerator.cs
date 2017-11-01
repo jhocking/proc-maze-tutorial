@@ -3,31 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class MazeMeshGenerator {
-	public Mesh maze { get; private set; }
+	
+	// generator params
+	public float width;		// how wide are hallways
+	public float height;	// how tall are hallways
 
 	public MazeMeshGenerator() {
-		maze = new Mesh();
-
-		// default for reference
-		Vector3[] newVertices = new Vector3[] {
-			new Vector3(0, 0, 0),
-			new Vector3(0, 3, 0),
-			new Vector3(3, 3, 0)
-		};
-		Vector2[] newUVs = new Vector2[] {
-			new Vector2(0, 0),
-			new Vector2(0, 1),
-			new Vector2(1, 1)
-		};
-		int[] newTriangles = new int[] {0, 1, 2};
-
-		maze.vertices = newVertices;
-		maze.uv = newUVs;
-		maze.triangles = newTriangles;
+		width = 3.75f;
+		height = 3.5f;
 	}
 
-	public void GenerateMaze(int[,] data, float width, float height) {
-		maze = new Mesh();
+	public Mesh FromData(int[,] data) {
+		Mesh maze = new Mesh();
 
 		List<Vector3> newVertices = new List<Vector3>();
 		List<Vector2> newUVs = new List<Vector2>();
@@ -105,6 +92,8 @@ public class MazeMeshGenerator {
 		maze.SetTriangles(wallTriangles.ToArray(), 1);
 
 		maze.RecalculateNormals();
+
+		return maze;
 	}
 
 	private void AddQuad(Matrix4x4 matrix, ref List<Vector3> newVertices, ref List<Vector2> newUVs, ref List<int> newTriangles) {

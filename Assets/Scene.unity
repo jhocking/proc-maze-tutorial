@@ -285,6 +285,7 @@ GameObject:
   m_Component:
   - component: {fileID: 533159585}
   - component: {fileID: 533159584}
+  - component: {fileID: 533159586}
   m_Layer: 0
   m_Name: Controller
   m_TagString: Untagged
@@ -303,9 +304,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38890f759500e455b8d86095c14bf863, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  showDebug: 1
-  stoneMat: {fileID: 2100000, guid: 2019d743bc0984ba1b81150901d44455, type: 2}
-  brickMat: {fileID: 2100000, guid: a36a45d20a42a4a0695e782d8b69409e, type: 2}
 --- !u!4 &533159585
 Transform:
   m_ObjectHideFlags: 0
@@ -319,3 +317,17 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &533159586
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 533159583}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37834c4099e2548dfb6334b6b64ae008, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  showDebug: 1
+  mat1: {fileID: 2100000, guid: 2019d743bc0984ba1b81150901d44455, type: 2}
+  mat2: {fileID: 2100000, guid: a36a45d20a42a4a0695e782d8b69409e, type: 2}
