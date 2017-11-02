@@ -5,8 +5,10 @@ using UnityEngine;
 public class MazeConstructor : MonoBehaviour {
 	public bool showDebug;
 
-	[SerializeField] private Material mat1;
-	[SerializeField] private Material mat2;
+	[SerializeField] private Material mazeMat1;
+	[SerializeField] private Material mazeMat2;
+	[SerializeField] private Material startMat;
+	[SerializeField] private Material treasureMat;
 
 	public int[,] data { get; private set; }
 
@@ -55,7 +57,7 @@ public class MazeConstructor : MonoBehaviour {
 		mc.sharedMesh = mf.mesh;
 
 		MeshRenderer mr = go.AddComponent<MeshRenderer>();
-		mr.materials = new Material[2] {mat1, mat2};
+		mr.materials = new Material[2] {mazeMat1, mazeMat2};
 	}
 
 	private void FindStartPosition() {
