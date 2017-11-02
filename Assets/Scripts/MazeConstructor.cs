@@ -18,6 +18,9 @@ public class MazeConstructor : MonoBehaviour {
 	public int startRow { get; private set; }
 	public int startCol { get; private set; }
 
+	public int goalRow { get; private set; }
+	public int goalCol { get; private set; }
+
 	private MazeDataGenerator _dataGenerator;
 	private MazeMeshGenerator _meshGenerator;
 
@@ -41,11 +44,19 @@ public class MazeConstructor : MonoBehaviour {
 		data = _dataGenerator.FromDimensions(sizeRows, sizeCols);
 
 		FindStartPosition();
+		FindGoalPosition();
 
 		// store values used to generate this mesh
 		hallWidth = _meshGenerator.width;
 		hallHeight = _meshGenerator.height;
 
+		PlaceStartTrigger();
+		PlaceGoalTrigger();
+
+		DisplayMaze();
+	}
+
+	private void DisplayMaze() {
 		GameObject go = new GameObject();
 		go.transform.position = Vector3.zero;
 		go.name = "Generated Dungeon";
@@ -74,6 +85,40 @@ public class MazeConstructor : MonoBehaviour {
 				}
 			}
 		}
+	}
+
+	private void FindGoalPosition() {
+		int[,] maze = data;
+		int rMax = maze.GetUpperBound(0);
+		int cMax = maze.GetUpperBound(1);
+
+		for (int i = 0; i <= rMax; i++) {
+			for (int j = cMax; j >= 0; j--) { // loop right to left
+				if (maze[i, j] == 0) {
+					goalRow = i;
+					goalCol = j;
+					return;
+				}
+			}
+		}
+	}
+
+	private void PlaceStartTrigger() {
+		GameObject go = GameObject.CreatePrimitive(PrimitiveType.Cube);
+		go.transform.position = new Vector3(startCol * hallWidth, .5f, startRow * hallWidth);
+		go.name = "Start Trigger";
+
+		go.GetComponent<BoxCollider>().isTrigger = true;
+		go.GetComponent<MeshRenderer>().sharedMaterial = startMat;
+	}
+
+	private void PlaceGoalTrigger() {
+		GameObject go = GameObject.CreatePrimitive(PrimitiveType.Cube);
+		go.transform.position = new Vector3(goalCol * hallWidth, .5f, goalRow * hallWidth);
+		go.name = "Treasure";
+
+		go.GetComponent<BoxCollider>().isTrigger = true;
+		go.GetComponent<MeshRenderer>().sharedMaterial = treasureMat;
 	}
 
 	// top-down debug display
