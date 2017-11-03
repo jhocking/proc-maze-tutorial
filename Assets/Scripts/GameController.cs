@@ -9,6 +9,7 @@ using UnityEngine.UI;
 public class GameController : MonoBehaviour {
 	[SerializeField] private FpsMovement player;
 	[SerializeField] private Text timeLabel;
+	[SerializeField] private Text scoreLabel;
 
 	private MazeConstructor generator;
 
@@ -49,6 +50,10 @@ public class GameController : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update() {
+		if (!player.enabled) {
+			return;
+		}
+
 		int timeUsed = (DateTime.Now - startTime).Seconds;
 		int timeLeft = timeLimit - timeUsed;
 
@@ -57,21 +62,23 @@ public class GameController : MonoBehaviour {
 		} else {
 			timeLabel.text = "TIME UP";
 			player.enabled = false;
-			Debug.Log("Here I am");
 		}
 	}
 
 	private void OnGoalTrigger(Collider other) {
 		Debug.Log("Goal!");
 		goalReached = true;
+
+		score += 1;
+		scoreLabel.text = score.ToString();
 	}
 
 	private void OnStartTrigger(Collider other) {
 		if (goalReached) {
 			Debug.Log("Finish!");
 			player.enabled = false;
-			score += 1;
-			// TODO display score
+
+			Invoke("StartNewMaze", 4);
 		}
 	}
 }
