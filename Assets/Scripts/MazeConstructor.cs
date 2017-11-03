@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -36,7 +37,7 @@ public class MazeConstructor : MonoBehaviour {
 		};
 	}
 
-	public void GenerateNewMaze(int sizeRows, int sizeCols) {
+	public void GenerateNewMaze(int sizeRows, int sizeCols, Action<Collider> startCallback, Action<Collider> goalCallback) {
 		if (sizeRows % 2 == 0 && sizeCols % 2 == 0) {
 			Debug.LogError("Odd numbers work better for dungeon size.");
 		}
@@ -50,8 +51,8 @@ public class MazeConstructor : MonoBehaviour {
 		hallWidth = _meshGenerator.width;
 		hallHeight = _meshGenerator.height;
 
-		PlaceStartTrigger();
-		PlaceGoalTrigger();
+		PlaceStartTrigger(startCallback);
+		PlaceGoalTrigger(goalCallback);
 
 		DisplayMaze();
 	}
@@ -103,22 +104,28 @@ public class MazeConstructor : MonoBehaviour {
 		}
 	}
 
-	private void PlaceStartTrigger() {
+	private void PlaceStartTrigger(Action<Collider> callback) {
 		GameObject go = GameObject.CreatePrimitive(PrimitiveType.Cube);
 		go.transform.position = new Vector3(startCol * hallWidth, .5f, startRow * hallWidth);
 		go.name = "Start Trigger";
 
 		go.GetComponent<BoxCollider>().isTrigger = true;
 		go.GetComponent<MeshRenderer>().sharedMaterial = startMat;
+
+		TriggerCallback tc = go.AddComponent<TriggerCallback>();
+		tc.callback = callback;
 	}
 
-	private void PlaceGoalTrigger() {
+	private void PlaceGoalTrigger(Action<Collider> callback) {
 		GameObject go = GameObject.CreatePrimitive(PrimitiveType.Cube);
 		go.transform.position = new Vector3(goalCol * hallWidth, .5f, goalRow * hallWidth);
 		go.name = "Treasure";
 
 		go.GetComponent<BoxCollider>().isTrigger = true;
 		go.GetComponent<MeshRenderer>().sharedMaterial = treasureMat;
+
+		TriggerCallback tc = go.AddComponent<TriggerCallback>();
+		tc.callback = callback;
 	}
 
 	// top-down debug display

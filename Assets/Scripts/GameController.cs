@@ -12,7 +12,7 @@ public class GameController : MonoBehaviour {
 	// Use this for initialization
 	void Start() {
 		_generator = GetComponent<MazeConstructor>();
-		_generator.GenerateNewMaze(13, 15);
+		_generator.GenerateNewMaze(13, 15, OnStartTrigger, OnGoalTrigger);
 
 		float x = _generator.startCol * _generator.hallWidth;
 		float y = 1;
@@ -23,5 +23,13 @@ public class GameController : MonoBehaviour {
 	// Update is called once per frame
 	void Update() {
 
+	}
+
+	private void OnGoalTrigger(Collider other) {
+		Debug.Log("GOAL");
+	}
+
+	private void OnStartTrigger(Collider other) {
+		Debug.Log("START");
 	}
 }
