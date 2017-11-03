@@ -271,7 +271,6 @@ GameObject:
   - component: {fileID: 1006281686}
   - component: {fileID: 1006281688}
   - component: {fileID: 1006281687}
-  - component: {fileID: 1006281689}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -301,11 +300,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 1006281685}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2dee4a49f6238475dae0048ed0cc6f3e, type: 3}
+  m_Script: {fileID: 11500000, guid: 8a78d79ad419d444e8388e9143cd8bba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  camera: {fileID: 1387988252}
   speed: 6
   gravity: -9.8
+  sensitivityHor: 9
+  sensitivityVert: 9
+  minimumVert: -45
+  maximumVert: 45
 --- !u!143 &1006281688
 CharacterController:
   m_ObjectHideFlags: 0
@@ -323,22 +327,6 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &1006281689
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1006281685}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ba5279d2c4d0d4be1abd59486f876475, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  axes: 1
-  sensitivityHor: 9
-  sensitivityVert: 9
-  minimumVert: -45
-  maximumVert: 45
 --- !u!1 &1065513736
 GameObject:
   m_ObjectHideFlags: 0
@@ -430,7 +418,6 @@ GameObject:
   - component: {fileID: 1387988251}
   - component: {fileID: 1387988250}
   - component: {fileID: 1387988249}
-  - component: {fileID: 1387988253}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: Untagged
@@ -509,22 +496,6 @@ Camera:
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
   m_StereoMirrorMode: 0
---- !u!114 &1387988253
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1387988247}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ba5279d2c4d0d4be1abd59486f876475, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  axes: 2
-  sensitivityHor: 9
-  sensitivityVert: 9
-  minimumVert: -45
-  maximumVert: 45
 --- !u!1 &1972134818
 GameObject:
   m_ObjectHideFlags: 0
