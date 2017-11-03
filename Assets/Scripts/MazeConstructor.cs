@@ -51,10 +51,10 @@ public class MazeConstructor : MonoBehaviour {
 		hallWidth = _meshGenerator.width;
 		hallHeight = _meshGenerator.height;
 
+		DisplayMaze();
+
 		PlaceStartTrigger(startCallback);
 		PlaceGoalTrigger(goalCallback);
-
-		DisplayMaze();
 	}
 
 	private void DisplayMaze() {
