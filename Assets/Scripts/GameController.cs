@@ -7,33 +7,40 @@ using UnityEngine.UI;
 [RequireComponent(typeof(MazeConstructor))]
 
 public class GameController : MonoBehaviour {
-	[SerializeField] private GameObject player;
+	[SerializeField] private FpsMovement player;
 	[SerializeField] private Text timeLabel;
 
-	private MazeConstructor _generator;
+	private MazeConstructor generator;
 
 	private DateTime startTime;
 	private int timeLimit;
 	private int reduceLimitBy;
 
+	private int score;
+	private bool goalReached;
+
 	// Use this for initialization
 	void Start() {
-		_generator = GetComponent<MazeConstructor>();
+		generator = GetComponent<MazeConstructor>();
 
 		timeLimit = 80;
 		reduceLimitBy = 5;
 		startTime = DateTime.Now;
+		score = 0;
 
 		StartNewMaze();
 	}
 
 	private void StartNewMaze() {
-		_generator.GenerateNewMaze(13, 15, OnStartTrigger, OnGoalTrigger);
+		generator.GenerateNewMaze(13, 15, OnStartTrigger, OnGoalTrigger);
 
-		float x = _generator.startCol * _generator.hallWidth;
+		float x = generator.startCol * generator.hallWidth;
 		float y = 1;
-		float z = _generator.startRow * _generator.hallWidth;
+		float z = generator.startRow * generator.hallWidth;
 		player.transform.position = new Vector3(x, y, z);
+
+		goalReached = false;
+		player.enabled = true;
 
 		// restart timer
 		timeLimit -= reduceLimitBy;
@@ -44,15 +51,27 @@ public class GameController : MonoBehaviour {
 	void Update() {
 		int timeUsed = (DateTime.Now - startTime).Seconds;
 		int timeLeft = timeLimit - timeUsed;
-		timeLabel.text = timeLeft.ToString();
+
+		if (timeLeft > 0) {
+			timeLabel.text = timeLeft.ToString();
+		} else {
+			timeLabel.text = "TIME UP";
+			player.enabled = false;
+			Debug.Log("Here I am");
+		}
 	}
 
 	private void OnGoalTrigger(Collider other) {
-		Debug.Log("GOAL");
-		_generator.DisposeOldMaze(); // TESTING
+		Debug.Log("Goal!");
+		goalReached = true;
 	}
 
 	private void OnStartTrigger(Collider other) {
-		Debug.Log("START");
+		if (goalReached) {
+			Debug.Log("Finish!");
+			player.enabled = false;
+			score += 1;
+			// TODO display score
+		}
 	}
 }

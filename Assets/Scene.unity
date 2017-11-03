@@ -136,7 +136,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38890f759500e455b8d86095c14bf863, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 1006281685}
+  player: {fileID: 1006281687}
   timeLabel: {fileID: 1972134820}
 --- !u!4 &533159585
 Transform:
@@ -303,7 +303,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a78d79ad419d444e8388e9143cd8bba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  camera: {fileID: 1387988252}
+  headCam: {fileID: 1387988252}
   speed: 6
   gravity: -9.8
   sensitivityHor: 9
