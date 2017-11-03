@@ -42,6 +42,8 @@ public class MazeConstructor : MonoBehaviour {
 			Debug.LogError("Odd numbers work better for dungeon size.");
 		}
 
+		DisposeOldMaze();
+
 		data = _dataGenerator.FromDimensions(sizeRows, sizeCols);
 
 		FindStartPosition();
@@ -57,10 +59,18 @@ public class MazeConstructor : MonoBehaviour {
 		PlaceGoalTrigger(goalCallback);
 	}
 
+	public void DisposeOldMaze() {
+		GameObject[] objects = GameObject.FindGameObjectsWithTag("Generated");
+		foreach (GameObject go in objects) {
+			Destroy(go);
+		}
+	}
+
 	private void DisplayMaze() {
 		GameObject go = new GameObject();
 		go.transform.position = Vector3.zero;
-		go.name = "Generated Dungeon";
+		go.name = "Procedural Maze";
+		go.tag = "Generated";
 
 		MeshFilter mf = go.AddComponent<MeshFilter>();
 		mf.mesh = _meshGenerator.FromData(data);
@@ -108,6 +118,7 @@ public class MazeConstructor : MonoBehaviour {
 		GameObject go = GameObject.CreatePrimitive(PrimitiveType.Cube);
 		go.transform.position = new Vector3(startCol * hallWidth, .5f, startRow * hallWidth);
 		go.name = "Start Trigger";
+		go.tag = "Generated";
 
 		go.GetComponent<BoxCollider>().isTrigger = true;
 		go.GetComponent<MeshRenderer>().sharedMaterial = startMat;
@@ -120,6 +131,7 @@ public class MazeConstructor : MonoBehaviour {
 		GameObject go = GameObject.CreatePrimitive(PrimitiveType.Cube);
 		go.transform.position = new Vector3(goalCol * hallWidth, .5f, goalRow * hallWidth);
 		go.name = "Treasure";
+		go.tag = "Generated";
 
 		go.GetComponent<BoxCollider>().isTrigger = true;
 		go.GetComponent<MeshRenderer>().sharedMaterial = treasureMat;

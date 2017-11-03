@@ -49,6 +49,7 @@ public class GameController : MonoBehaviour {
 
 	private void OnGoalTrigger(Collider other) {
 		Debug.Log("GOAL");
+		_generator.DisposeOldMaze(); // TESTING
 	}
 
 	private void OnStartTrigger(Collider other) {
