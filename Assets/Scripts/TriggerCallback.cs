@@ -7,7 +7,8 @@ public class TriggerCallback : MonoBehaviour {
 	public Action<Collider> callback;
 
 	void OnTriggerEnter(Collider other) {
-		if (callback != null)
+		if (callback != null) {
 			callback(other);
+		}
 	}
 }

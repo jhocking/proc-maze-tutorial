@@ -22,12 +22,12 @@ public class MazeConstructor : MonoBehaviour {
 	public int goalRow { get; private set; }
 	public int goalCol { get; private set; }
 
-	private MazeDataGenerator _dataGenerator;
-	private MazeMeshGenerator _meshGenerator;
+	private MazeDataGenerator dataGenerator;
+	private MazeMeshGenerator meshGenerator;
 
 	void Awake() {
-		_dataGenerator = new MazeDataGenerator();
-		_meshGenerator = new MazeMeshGenerator();
+		dataGenerator = new MazeDataGenerator();
+		meshGenerator = new MazeMeshGenerator();
 
 		// default to walls surrounding a single empty cell
 		data = new int[,] {
@@ -44,14 +44,14 @@ public class MazeConstructor : MonoBehaviour {
 
 		DisposeOldMaze();
 
-		data = _dataGenerator.FromDimensions(sizeRows, sizeCols);
+		data = dataGenerator.FromDimensions(sizeRows, sizeCols);
 
 		FindStartPosition();
 		FindGoalPosition();
 
 		// store values used to generate this mesh
-		hallWidth = _meshGenerator.width;
-		hallHeight = _meshGenerator.height;
+		hallWidth = meshGenerator.width;
+		hallHeight = meshGenerator.height;
 
 		DisplayMaze();
 
@@ -73,7 +73,7 @@ public class MazeConstructor : MonoBehaviour {
 		go.tag = "Generated";
 
 		MeshFilter mf = go.AddComponent<MeshFilter>();
-		mf.mesh = _meshGenerator.FromData(data);
+		mf.mesh = meshGenerator.FromData(data);
 
 		MeshCollider mc = go.AddComponent<MeshCollider>();
 		mc.sharedMesh = mf.mesh;
