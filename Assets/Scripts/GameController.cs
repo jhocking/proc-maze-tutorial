@@ -65,15 +65,17 @@ public class GameController : MonoBehaviour {
 		}
 	}
 
-	private void OnGoalTrigger(Collider other) {
+	private void OnGoalTrigger(GameObject trigger, GameObject other) {
 		Debug.Log("Goal!");
 		goalReached = true;
 
 		score += 1;
 		scoreLabel.text = score.ToString();
+
+		Destroy(trigger);
 	}
 
-	private void OnStartTrigger(Collider other) {
+	private void OnStartTrigger(GameObject trigger, GameObject other) {
 		if (goalReached) {
 			Debug.Log("Finish!");
 			player.enabled = false;

@@ -37,7 +37,7 @@ public class MazeConstructor : MonoBehaviour {
 		};
 	}
 
-	public void GenerateNewMaze(int sizeRows, int sizeCols, Action<Collider> startCallback, Action<Collider> goalCallback) {
+	public void GenerateNewMaze(int sizeRows, int sizeCols, TriggerEventHandler startCallback, TriggerEventHandler goalCallback) {
 		if (sizeRows % 2 == 0 && sizeCols % 2 == 0) {
 			Debug.LogError("Odd numbers work better for dungeon size.");
 		}
@@ -114,7 +114,7 @@ public class MazeConstructor : MonoBehaviour {
 		}
 	}
 
-	private void PlaceStartTrigger(Action<Collider> callback) {
+	private void PlaceStartTrigger(TriggerEventHandler callback) {
 		GameObject go = GameObject.CreatePrimitive(PrimitiveType.Cube);
 		go.transform.position = new Vector3(startCol * hallWidth, .5f, startRow * hallWidth);
 		go.name = "Start Trigger";
@@ -123,11 +123,11 @@ public class MazeConstructor : MonoBehaviour {
 		go.GetComponent<BoxCollider>().isTrigger = true;
 		go.GetComponent<MeshRenderer>().sharedMaterial = startMat;
 
-		TriggerCallback tc = go.AddComponent<TriggerCallback>();
+		TriggerEventRouter tc = go.AddComponent<TriggerEventRouter>();
 		tc.callback = callback;
 	}
 
-	private void PlaceGoalTrigger(Action<Collider> callback) {
+	private void PlaceGoalTrigger(TriggerEventHandler callback) {
 		GameObject go = GameObject.CreatePrimitive(PrimitiveType.Cube);
 		go.transform.position = new Vector3(goalCol * hallWidth, .5f, goalRow * hallWidth);
 		go.name = "Treasure";
@@ -136,7 +136,7 @@ public class MazeConstructor : MonoBehaviour {
 		go.GetComponent<BoxCollider>().isTrigger = true;
 		go.GetComponent<MeshRenderer>().sharedMaterial = treasureMat;
 
-		TriggerCallback tc = go.AddComponent<TriggerCallback>();
+		TriggerEventRouter tc = go.AddComponent<TriggerEventRouter>();
 		tc.callback = callback;
 	}
 
