@@ -104,7 +104,8 @@ public class MazeMeshGenerator
         return maze;
     }
 
-    private void AddQuad(Matrix4x4 matrix, ref List<Vector3> newVertices, ref List<Vector2> newUVs, ref List<int> newTriangles)
+    private void AddQuad(Matrix4x4 matrix, ref List<Vector3> newVertices,
+        ref List<Vector2> newUVs, ref List<int> newTriangles)
     {
         int index = newVertices.Count;
 
