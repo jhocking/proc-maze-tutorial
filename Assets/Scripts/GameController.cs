@@ -22,10 +22,13 @@ public class GameController : MonoBehaviour
     private bool goalReached;
 
     // Use this for initialization
-    void Start()
-    {
+    void Start() {
         generator = GetComponent<MazeConstructor>();
+        StartNewGame();
+    }
 
+    private void StartNewGame()
+    {
         timeLimit = 80;
         reduceLimitBy = 5;
         startTime = DateTime.Now;
@@ -70,6 +73,8 @@ public class GameController : MonoBehaviour
         {
             timeLabel.text = "TIME UP";
             player.enabled = false;
+
+            Invoke("StartNewGame", 4);
         }
     }
 
