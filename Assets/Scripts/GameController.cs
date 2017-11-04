@@ -54,7 +54,7 @@ public class GameController : MonoBehaviour {
 			return;
 		}
 
-		int timeUsed = (DateTime.Now - startTime).Seconds;
+		int timeUsed = (int)(DateTime.Now - startTime).TotalSeconds;
 		int timeLeft = timeLimit - timeUsed;
 
 		if (timeLeft > 0) {
