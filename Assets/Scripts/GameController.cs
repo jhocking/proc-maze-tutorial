@@ -32,7 +32,9 @@ public class GameController : MonoBehaviour
         timeLimit = 80;
         reduceLimitBy = 5;
         startTime = DateTime.Now;
+
         score = 0;
+        scoreLabel.text = score.ToString();
 
         StartNewMaze();
     }
