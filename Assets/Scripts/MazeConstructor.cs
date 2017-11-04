@@ -103,7 +103,7 @@ public class MazeConstructor : MonoBehaviour {
 		int rMax = maze.GetUpperBound(0);
 		int cMax = maze.GetUpperBound(1);
 
-		for (int i = 0; i <= rMax; i++) {
+		for (int i = rMax; i >= 0; i--) { // loop top to bottom
 			for (int j = cMax; j >= 0; j--) { // loop right to left
 				if (maze[i, j] == 0) {
 					goalRow = i;
