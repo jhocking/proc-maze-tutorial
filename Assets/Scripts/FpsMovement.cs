@@ -59,6 +59,6 @@ public class FpsMovement : MonoBehaviour
         rotationVert -= Input.GetAxis("Mouse Y") * sensitivityVert;
         rotationVert = Mathf.Clamp(rotationVert, minimumVert, maximumVert);
 
-        headCam.transform.localEulerAngles = new Vector3(rotationVert, 0, 0);
+		headCam.transform.localEulerAngles = new Vector3(rotationVert, headCam.transform.localEulerAngles.y, 0);
     }
 }
