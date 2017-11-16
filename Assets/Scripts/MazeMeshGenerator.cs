@@ -11,7 +11,7 @@ using UnityEngine;
 public class MazeMeshGenerator
 {    
     // generator params
-    public float width;        // how wide are hallways
+    public float width;     // how wide are hallways
     public float height;    // how tall are hallways
 
     public MazeMeshGenerator()
@@ -26,7 +26,6 @@ public class MazeMeshGenerator
 
         List<Vector3> newVertices = new List<Vector3>();
         List<Vector2> newUVs = new List<Vector2>();
-        //List<int> newTriangles = new List<int>();
 
         // multiple materials for floors and walls
         maze.subMeshCount = 2;
@@ -101,7 +100,7 @@ public class MazeMeshGenerator
 
         maze.vertices = newVertices.ToArray();
         maze.uv = newUVs.ToArray();
-        //maze.triangles = newTriangles.ToArray();
+        
         maze.SetTriangles(floorTriangles.ToArray(), 0);
         maze.SetTriangles(wallTriangles.ToArray(), 1);
 
