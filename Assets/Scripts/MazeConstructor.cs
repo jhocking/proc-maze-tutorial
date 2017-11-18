@@ -91,14 +91,6 @@ public class MazeConstructor : MonoBehaviour
         PlaceGoalTrigger(goalCallback);
     }
 
-    public void DisposeOldMaze()
-    {
-        GameObject[] objects = GameObject.FindGameObjectsWithTag("Generated");
-        foreach (GameObject go in objects) {
-            Destroy(go);
-        }
-    }
-
     private void DisplayMaze()
     {
         GameObject go = new GameObject();
@@ -114,6 +106,14 @@ public class MazeConstructor : MonoBehaviour
 
         MeshRenderer mr = go.AddComponent<MeshRenderer>();
         mr.materials = new Material[2] {mazeMat1, mazeMat2};
+    }
+
+    public void DisposeOldMaze()
+    {
+        GameObject[] objects = GameObject.FindGameObjectsWithTag("Generated");
+        foreach (GameObject go in objects) {
+            Destroy(go);
+        }
     }
 
     private void FindStartPosition()
